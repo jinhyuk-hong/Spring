@@ -43,6 +43,19 @@
 	updateDate = sysdate
 	where bno = #{bno}
 </update>
+<select id="getListWithPaing" resultType="org.zerock.domain.BoardVO">
+	<![CDATA[
 
+		select bno, title, content, writer, regdate, updatedate from 
+		( select /*+INDEX(tbl_board pk_board) */ 
+	    rownum rn, bno, title, content, writer ,regdate, updatedate
+	    from 
+	    tbl_board 
+	    where rownum <=#{pageNum}*#{amount}
+	    )
+	    where rn>(#{pageNum}-1)*#{amount}
 
+	]]>
+</select>
+	
 </mapper>
