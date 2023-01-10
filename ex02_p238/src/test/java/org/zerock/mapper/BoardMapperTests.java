@@ -90,4 +90,12 @@ public class BoardMapperTests {
 		PageDTO pageDTO = new PageDTO(cri, 250);
 		log.info(pageDTO);
 	}
+	@Test
+	public void testSearch() {
+		Criteria cri = new Criteria();
+		cri.setKeyword("새로");
+		cri.setType("TC");
+		List<BoardVO> list = mapper.getListWithPaing(cri);
+		list.forEach(board->log.info(board));
+	}
 }
