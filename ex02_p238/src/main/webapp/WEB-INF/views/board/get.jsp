@@ -48,7 +48,7 @@
         <a href="/board/list">List</a></button> --%>
 
 <button data-oper='modify' class="btn btn-info">수정</button>
-<button data-oper='List' class="btn btn-default">목록</button>
+<button data-oper='list' class="btn btn-default">목록</button>
 
 
 <%-- <form id='operForm' action="/boad/modify" method="get">
@@ -90,7 +90,7 @@
       
       <div class="panel-heading">
         <i class="fa fa-comments fa-fw"></i> Reply
-        <button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>New Reply</button>
+        <button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>댓글 작성</button>
       </div>      
       
       
@@ -126,11 +126,11 @@
             </div>
             <div class="modal-body">
               <div class="form-group">
-                <label>Reply</label> 
+                <label>댓글내용</label> 
                 <input class="form-control" name='reply' value='New Reply!!!!'>
               </div>      
               <div class="form-group">
-                <label>Replyer</label> 
+                <label>작성자</label> 
                 <input class="form-control" name='replyer' value='replyer'>
               </div>
               <div class="form-group">
@@ -144,7 +144,7 @@
         <button id='modalRemoveBtn' type="button" class="btn btn-danger">Remove</button>
         <button id='modalRegisterBtn' type="button" class="btn btn-primary">Register</button>
         <button id='modalCloseBtn' type="button" class="btn btn-default">Close</button>
-      </div>          </div>
+      </div>         
           <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
@@ -159,12 +159,13 @@
 
 $(document).ready(function () {
   
+	
   var bnoValue = '<c:out value="${board.bno}"/>';
   var replyUL = $(".chat");
   
     showList(1);
     
-function showList(page){
+ function showList(page){
 	
 	  console.log("show list " + page);
     
@@ -202,7 +203,7 @@ function showList(page){
  
    });//end function
      
- }//end showList
+ }//end showList  
     
     var pageNum = 1;
     var replyPageFooter = $(".panel-footer");
@@ -261,7 +262,7 @@ function showList(page){
      });     
 
     
-/*     function showList(page){
+    /*  function showList(page){
       
       replyService.getList({bno:bnoValue,page: page|| 1 }, function(list) {
         
@@ -284,7 +285,7 @@ function showList(page){
 
       });//end function
       
-   }//end showList */
+   }//end showList */  
    
     var modal = $(".modal");
     var modalInputReply = modal.find("input[name='reply']");
