@@ -90,9 +90,9 @@
 	</delete>
 	
 	<select id="cart_check" resultType="int">
-		select count(*)
+	select count(*)
 		  from cart
-		 where user_id = #{user_id} and book_isbn = #{book_isbn} and return_status = false 
+		 where user_id = #{user_id} and book_isbn = #{book_isbn} 
 	</select>
 	
 </mapper>  

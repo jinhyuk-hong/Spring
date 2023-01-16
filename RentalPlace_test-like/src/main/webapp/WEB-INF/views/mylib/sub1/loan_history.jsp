@@ -132,21 +132,21 @@
                                     </thead>
                                     <tbody>
                                     
-	                                    <c:forEach var="loan_history" items="${loan_history}">
+	                                    <c:forEach var="loan_history1" items="${loan_history}">
 										<tr>
-											<td>${loan_history.book_title }</td> 
-											<td>${loan_history.book_author}</td>
-											<td>${loan_history.loan_date }</td>
+											<td>${loan_history1.book_title }</td> 
+											<td>${loan_history1.book_author}</td>
+											<td>${loan_history1.loan_date }</td>
 											
-											<c:if test="${empty loan_history.return_date }">
+											<c:if test="${empty loan_history1.return_date }">
 											<td><span style="color:red; font-weight: bold">미반납</span></td>
 											</c:if>
 											
-											<c:if test="${not empty loan_history.return_date }">
-											<td>${loan_history.return_date }</td>
+											<c:if test="${not empty loan_history1.return_date }">
+											<td>${loan_history1.return_date }</td>
 											</c:if>
 											
-											<td>${loan_history.return_period }</td>
+											<td>${loan_history1.return_period }</td>
 											
 										</tr>
 										</c:forEach>

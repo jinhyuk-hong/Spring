@@ -51,7 +51,7 @@
 			select * 
 			  from cart
 			 where user_id = #{user_id} 
-			  order by cart_id 
+			  order by cart_id desc
 			  limit #{cri.skip}, #{cri.amount}
 		</select>
  		

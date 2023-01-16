@@ -60,6 +60,7 @@ public class MyLoanHistoryController {
 
 		// 대출 내역
 		model.addAttribute("loan_history", loan_history);
+		
 
 		// 대출 건수
 		int total = service.get_total(id, start_date, end_date);
@@ -121,7 +122,7 @@ public class MyLoanHistoryController {
 
 		// 찜한 내역
 		model.addAttribute("cart_history", cart_history);
-
+		
 		// 대출 건수
 		int total = service.get_total_cart(id);
 		model.addAttribute("total", total);

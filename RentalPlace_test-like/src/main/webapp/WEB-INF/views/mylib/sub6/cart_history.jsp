@@ -94,7 +94,7 @@
 
                             <!-- 테이블 -->
                             <div class="table-wrap">
-                            	<c:if test="${not empty cart }">
+                            	<c:if test="${not empty cart_history }">
                                 <table>
                                     <thead>
                                         <tr>
@@ -109,24 +109,24 @@
                                     </thead>
                                     <tbody>
                                     
-	                                    <c:forEach var="cart" items="${cart}">
+	                                    <c:forEach var="cart" items="${cart_history}">
 										<tr>
 											<td><input type="checkbox" /></td> 
 											<td class="">
                                                 <img src="${cart.book_cover }" style="width: 200px;">
                                             </td> 
 											<td>${cart.book_title }</td> 
-											<td>${cart.bookCount}
+											 <td>${cart.bookCount} 
 											<div>
 											<button type="button" id="plus_btn" value="추가">+</button>
 											<button type="button" id="minus_btn" value="감소">-</button>	
 											</div>
-											<a class = "modify_btn" data-cartId="${cart.cartId}"> 변경</a>
-											</td>
-											<td>${cart.priceStandard } pattern="#,###원"</td>
+											<button class = "modify_btn" data-cartId="${cart.bookCount}"> 변경</button>
+											</td> 
+											<td>${cart.priceStandard }원</td>
 											<td>${cart.book_publisher }</td>
 											<td>
-												<button type="button" id="deleteBtn" value="삭제하기" data-cartid="${cart.cartId }">삭제하기</button>
+												<button type="button" id="deleteBtn" value="삭제하기" data-cartid="${cart.cart_id }">삭제하기</button>
 												<button type="button" id="addBagBtn" value="구매하기">구매하기</button>
 											</td>
 										</tr>
@@ -165,7 +165,7 @@
 							</form>
                         </div>
 						<br>
-                        <c:if test="${empty cart }">
+                        <c:if test="${empty cart_history }">
 							<h2>장바구니가 비었습니다.</h2>
 						</c:if>
                     </div>
@@ -212,17 +212,17 @@
 				}
 			});
 			$(".quantity_modify_btn").on("click", function(){
-				let cartId = $(this).data("cartid");
+				let cart_id = $(this).data("cart_id");
 				let bookCount = $(this).parent("td").find("input").val();
-				$(".update_cartId").val(cartId);
+				$(".update_cartId").val(cart_id);
 				$(".update_bookCount").val(bookCount);
 				$(".quantity_update_form").submit();
 				
 			});
 			$(".delete_btn").on("click", function(e){
 				e.preventDefault();
-				const cartId = $(this).data("cartid");
-				$(".delete_cartId").val(cartId);
+				const cart_id = $(this).data("cart_id");
+				$(".delete_cart_id").val(cart_id);
 				$(".quantity_delete_form").submit();
 			});
 			 

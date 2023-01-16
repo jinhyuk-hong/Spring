@@ -60,5 +60,5 @@ public class BookDTO {
 	//장바구니 
 	private int cart_id;
 	
-	 private int bookCount;
+	private int bookCount;
 }
