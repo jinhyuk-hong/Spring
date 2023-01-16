@@ -2,13 +2,11 @@ package com.library.service.search;
 
 import java.util.List;
 
-
 import com.library.model.search.BookDTO;
 import com.library.model.search.DateDTO;
 
 public interface BookService {
-	
-	
+
 	// 도서 대출
 	public void loan(BookDTO dto);
 
@@ -32,4 +30,15 @@ public interface BookService {
 	
 	// 찜 등록 하기 
 	public void like(BookDTO dto);
+
+	/*-------------------------------- 장바구니 구현------------------ */
+	// 장바구니 등록 하기 
+	public void cart(BookDTO dto);
+		
+	// 장바구니 안에 제품이 있는지 체크 (회원이 이미 장바구니에 넣은 도서인지 체크)
+	public int cart_check(String user_id, String book_isbn);
+	
+	public int modifyCount(BookDTO dto);
+	
+	public int deleteCart(int cartId);
 }

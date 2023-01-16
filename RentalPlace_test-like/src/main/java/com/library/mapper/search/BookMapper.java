@@ -32,4 +32,15 @@ public interface BookMapper {
 	
 	// 도서 대출
 	public void like(BookDTO dto);
+	
+	/*------------------------------- 장바구니 구현-------------------------------------- */
+	public void cart(BookDTO dto);
+	
+	public int cart_check(@Param("user_id")String user_id, @Param("book_isbn")String book_isbn);
+	
+	public int modifyCount(BookDTO dto);
+	
+
+	
+	public int deleteCart(int cartId);
 }

@@ -62,6 +62,31 @@ public class BookServiceImpl implements BookService {
 	public void like(BookDTO dto) {
 		mapper.like(dto);
 	}
+
+	@Override
+	public void cart(BookDTO dto) {
+		mapper.cart(dto);
+		
+	}
+
+	@Override
+	public int cart_check(String user_id, String book_isbn) {
+		// TODO Auto-generated method stub
+		return mapper.cart_check(user_id, book_isbn);
+	}
+
+	@Override
+	public int modifyCount(BookDTO dto) {
+		// TODO Auto-generated method stub
+		return mapper.modifyCount(dto);
+	}
+
+	@Override
+	public int deleteCart(int cartId) {
+		
+		return mapper.deleteCart(cartId);
+	}
+	
 	
 	
 }

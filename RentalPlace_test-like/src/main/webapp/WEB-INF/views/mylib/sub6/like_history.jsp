@@ -185,15 +185,7 @@
 				moveForm.find("input[name = 'page']").val($(this).attr("href"));
 				moveForm.submit();
 			});
-			$("#addBagBtn").click(function() {
-				var check = confirm("상품이 장바구니에 담겼습니다. 확인하시겠습니까?");
-				if (check) {
-					location.assign("../mylib/sub1/cart");
-				} 
-			});
-	
-
-
+			
 			 
 		});
 		

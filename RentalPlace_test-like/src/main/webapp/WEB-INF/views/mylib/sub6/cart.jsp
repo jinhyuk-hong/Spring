@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>라온도서관 > 나의도서관 > 장바구니</title>
+<title>라온도서관 > 나의도서관 > 찜한 도서</title>
 <link rel="stylesheet" href="/resources/css/mylib/sub1/loan_history.css">
 <link rel="stylesheet" href="/resources/css/header.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
@@ -24,7 +24,7 @@
             <div class="doc-info">
                 <!-- doc title -->
                 <div class="doc-title">
-                    <h3>장바구니</h3>
+                    <h3>찜한 도서</h3>
                     <ul>
                         <!-- 홈 btn img -->
                         <li class="first" style="background-image: none;">
@@ -94,7 +94,7 @@
 
                             <!-- 테이블 -->
                             <div class="table-wrap">
-                            	<c:if test="${not empty cart }">
+                            	<c:if test="${not empty like_history }">
                                 <table>
                                     <thead>
                                         <tr>
@@ -109,19 +109,19 @@
                                     </thead>
                                     <tbody>
                                     
-	                                    <c:forEach var="cart" items="${cart}">
+	                                    <c:forEach var="like_history" items="${like_history}">
 										<tr>
 											<td><input type="checkbox" /></td> 
 											<td class="">
-                                                <img src="${cart.book_cover }" style="width: 200px;">
+                                                <img src="${like_history.book_cover }" style="width: 200px;">
                                             </td> 
-											<td>${cart.book_title }</td> 
-											<td>${cart.book_author}</td>
-											<td>${cart.book_pubDate }</td>
-											<td>${cart.book_publisher }</td>
+											<td>${like_history.book_title }</td> 
+											<td>${like_history.book_author}</td>
+											<td>${like_history.book_pubDate }</td>
+											<td>${like_history.book_publisher }</td>
 											<td>
 												<button type="button" id="deleteBtn" value="삭제하기">삭제하기</button>
-												
+												<button type="button" id="addBagBtn" value="장바구니 담기">장바구니</button>
 											</td>
 										</tr>
 										</c:forEach>
@@ -151,7 +151,7 @@
                             
                         </div>
 						<br>
-                        <c:if test="${empty cart }">
+                        <c:if test="${empty like_history }">
 							<h2>찜한 도서가 없습니다.</h2>
 						</c:if>
                     </div>
@@ -186,9 +186,6 @@
 				moveForm.submit();
 			});
 			
-	
-
-
 			 
 		});
 		

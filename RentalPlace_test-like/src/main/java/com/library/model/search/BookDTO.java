@@ -57,4 +57,8 @@ public class BookDTO {
 	
 	// 연체일
 	private int overdue_date;
+	//장바구니 
+	private int cart_id;
+	
+	 private int bookCount;
 }
