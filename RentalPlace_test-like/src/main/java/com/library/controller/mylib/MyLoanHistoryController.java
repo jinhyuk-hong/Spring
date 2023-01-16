@@ -106,7 +106,32 @@ public class MyLoanHistoryController {
 		return "/mylib/sub6/like_history";
 	}
 	
-	
+	/* 장바구니 */
+	@GetMapping("/cart-history")
+	public String My_cart_history(Model model, Criteria cri, Principal principal) {
+
+		System.out.println("my_cart_history 진입");
+
+		// 로그인 된 user_id 받아오기
+		String id = principal.getName();
+
+
+		// 회원의 장바구니 내역 받아오기
+		List<BookDTO> cart_history = service.cart_history(id, cri);
+
+		// 찜한 내역
+		model.addAttribute("cart_history", cart_history);
+
+		// 대출 건수
+		int total = service.get_total_cart(id);
+		model.addAttribute("total", total);
+
+		// 페이징 정보
+		ViewPage vp = new ViewPage(cri, total);
+		model.addAttribute("pageMaker", vp);
+
+		return "/mylib/sub6/cart_history";
+	}
 	
 
 	public String date(String type) {

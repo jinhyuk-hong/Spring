@@ -39,7 +39,21 @@
 			  order by like_no desc
 			  limit #{cri.skip}, #{cri.amount}
 		</select>
+	<!-- 	장바구니 -->
+	<select id="get_total_cart" resultType="int">
+			select count(*) 
+			  from cart 
+			 where user_id = #{user_id} 
+		</select>
 		
+		<!-- 장바구니 페이징 --> 
+		<select id="cart_history" resultType="com.library.model.search.BookDTO">
+			select * 
+			  from cart
+			 where user_id = #{user_id} 
+			  order by cart_id 
+			  limit #{cri.skip}, #{cri.amount}
+		</select>
  		
 		<sql id="criteria">
 	        <if test="start_date != null">

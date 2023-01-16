@@ -84,7 +84,9 @@
       	<li class="sub6">
             <a href="/mylib/like-history">찜한 도서</a>
        	 </li>
-        
+        <li class="sub6">
+            <a href="/mylib/cart-history">장바구니</a>
+       	 </li>
         
     </ul>
 </div>

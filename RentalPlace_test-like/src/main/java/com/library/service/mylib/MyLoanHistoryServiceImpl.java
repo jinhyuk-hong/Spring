@@ -40,6 +40,18 @@ public class MyLoanHistoryServiceImpl implements MyLoanHistoryService {
 	public int get_total_like(String user_id) {
 		return mapper.get_total_like(user_id);
 	}
+
+	@Override
+	public List<BookDTO> cart_history(String user_id, Criteria cri) {
+		// TODO Auto-generated method stub
+		return mapper.cart_history(user_id, cri);
+	}
+
+	@Override
+	public int get_total_cart(String user_id) {
+		// TODO Auto-generated method stub
+		return mapper.get_total_cart(user_id);
+	}
 	
 	
 }

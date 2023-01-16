@@ -20,5 +20,9 @@ public interface MyLoanHistoryService {
 	
 	// 찜한 도서 건수 출력
 	public int get_total_like(String user_id);
-
+	
+	public List<BookDTO> cart_history(String user_id, Criteria cri);
+	
+	// 찜한 도서 건수 출력
+	public int get_total_cart(String user_id);
 }

@@ -70,11 +70,11 @@
 	</insert>
 	<!-- 장바구니 -->
 	<insert id="cart">
-		insert into cart(cartid,user_id, user_email, book_title, book_author, book_isbn, 
-		book_cover, book_pubDate, book_publisher, priceStandard)
+		insert into cart(user_id, user_email, book_title, book_author, book_isbn, 
+		book_cover, book_pubDate, book_publisher, priceStandard ,bookCount)
 		values
-		(#{carid}, #{user_id}, #{user_email}, #{book_title}, #{book_author}, #{book_isbn}, #{book_cover}, 
-		#{book_pubDate}, #{book_publisher}, #{priceStandard})
+		( #{user_id}, #{user_email}, #{book_title}, #{book_author}, #{book_isbn}, #{book_cover}, 
+		#{book_pubDate}, #{book_publisher}, #{priceStandard}, #{bookCount})
 	</insert>
 	
 	<update id="modifyCount">
@@ -91,7 +91,7 @@
 	
 	<select id="cart_check" resultType="int">
 		select count(*)
-		  from loan_history
+		  from cart
 		 where user_id = #{user_id} and book_isbn = #{book_isbn} and return_status = false 
 	</select>
 	

@@ -446,7 +446,7 @@ public class BookController {
 		public String updateCartPOST(BookDTO book) {
 			bookService.modifyCount(book);
 			
-			return "redirect:/mylib/cart" +book.getUser_id();
+			return "redirect:/cart/" +book.getUser_id();
 
 		}
 		@PostMapping("/cart/delete")

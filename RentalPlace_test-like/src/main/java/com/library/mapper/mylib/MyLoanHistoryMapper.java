@@ -25,5 +25,10 @@ public interface MyLoanHistoryMapper {
 
 		// 대출 수 출력
 		public int get_total_like(@Param("user_id") String user_id);
+		
+		/* -----------------------------장바구니 추가--------------------- */
+		public List<BookDTO> cart_history(@Param("user_id") String user_id, @Param("cri") Criteria cri);
 
+		// 대출 수 출력
+		public int get_total_cart(@Param("user_id") String user_id);
 }

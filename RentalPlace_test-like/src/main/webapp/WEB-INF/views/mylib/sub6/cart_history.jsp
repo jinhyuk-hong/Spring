@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>라온도서관 > 나의도서관 > 찜한 도서</title>
+<title>라온도서관 > 나의도서관 >  장바구니</title>
 <link rel="stylesheet" href="/resources/css/mylib/sub1/loan_history.css">
 <link rel="stylesheet" href="/resources/css/header.css">
 <link rel="stylesheet" href="/resources/css/footer.css">
@@ -24,7 +24,7 @@
             <div class="doc-info">
                 <!-- doc title -->
                 <div class="doc-title">
-                    <h3>찜한 도서</h3>
+                    <h3>장바구니</h3>
                     <ul>
                         <!-- 홈 btn img -->
                         <li class="first" style="background-image: none;">
@@ -113,7 +113,7 @@
 										<tr>
 											<td><input type="checkbox" /></td> 
 											<td class="">
-                                                <img src="${like_history.book_cover }" style="width: 200px;">
+                                                <img src="${cart.book_cover }" style="width: 200px;">
                                             </td> 
 											<td>${cart.book_title }</td> 
 											<td>${cart.bookCount}
@@ -121,7 +121,7 @@
 											<button type="button" id="plus_btn" value="추가">+</button>
 											<button type="button" id="minus_btn" value="감소">-</button>	
 											</div>
-											<a class = modify_btn" data-cartId="${cart.cartId}"> 변경</a>
+											<a class = "modify_btn" data-cartId="${cart.cartId}"> 변경</a>
 											</td>
 											<td>${cart.priceStandard } pattern="#,###원"</td>
 											<td>${cart.book_publisher }</td>
@@ -161,20 +161,17 @@
 							</form>
 							<form action="/cart/delete" method="post" class="quantity_delete_form">
 								<input type="hidden" name="cartId" class="delete_cartId">
-								<input type="hidden" name="memberId" value="${member.memberId}">
+								<input type="hidden" name="memberId" value="${member.userId}">
 							</form>
                         </div>
 						<br>
                         <c:if test="${empty cart }">
-							<h2>찜한 도서가 없습니다.</h2>
+							<h2>장바구니가 비었습니다.</h2>
 						</c:if>
                     </div>
 
                 </div>
-				<form action="/cart/update" method="post" class="quantity_update_form">
-				<input type="hidden" name="cartId" class="update_cartId">
-				<input type="hidden" name="bookCount" class="update_bookCount">
-				<input type="hidden" name="memberId" value="${member.userId}">
+				
 			</form>
             </div>
         </div>
