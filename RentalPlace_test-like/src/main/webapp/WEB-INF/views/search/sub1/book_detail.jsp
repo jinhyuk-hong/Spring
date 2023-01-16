@@ -157,7 +157,35 @@
 							<input type="hidden" name="keyword" value="${cri.keyword }">
                             <button id="like_btn" class=" btn2">찜하기</button>
                         </form>
-
+                       <!--------------  장바구니 추가 ------------------>
+						 <form id="cart" onsubmit="return false;" method="post">
+                        
+                        	<sec:authorize access="isAuthenticated()">
+							<input type="hidden" class="user_email" name="user_email" 
+								value=<sec:authentication property="principal.dto.user_email"/>>
+							</sec:authorize>
+							
+							<sec:authorize access="isAnonymous()">
+							<input type="hidden" class="user_email" name="user_email">
+							</sec:authorize>
+							
+							<input type="hidden" name="book_title" value="${book.book_title }">
+							<input type="hidden" name="book_author" value="${book.book_author }">
+							<input type="hidden" class="book_isbn" name="book_isbn" value="${book.book_isbn }">
+							<input type="hidden" name="book_cover" value="${book.book_cover }">
+							<input type="hidden" name="book_pubDate" value="${book.book_pubDate }">
+							<input type="hidden" name="book_publisher" value="${book.book_publisher }">
+							<input type="hidden" name="priceStandard" value="${book.priceStandard }">
+							<input type="hidden" name="amount" value="${cri.amount }">
+							<input type="hidden" name="page" value="${cri.page }">
+							<input type="hidden" name="type" value="${cri.type }">
+							<input type="hidden" name="keyword" value="${cri.keyword }">
+							<div>
+							<input type ="text" class="quantity input" value="1">주문수량<span><button class ="plus_btn">+</button>
+							<button class ="minus_btn">-</button></span>
+							</div>
+                            <button id="cart_btn" class=" btn2">장바구니 담기</button>
+                        </form>
                     </div>
 
                     <h3>책 소개</h3>
@@ -274,6 +302,62 @@
 				
 			} 
 				
+		});
+	});
+	</script>	
+	<!-- 장바구니 -->
+	<script type="text/javascript">
+	$(function() {
+		$(".sub1").addClass("active"); //왼쪽 카테고리 '도서검색' 활성화
+		 
+		$("#cart_btn").click(function() {
+			
+			let email = $('.user_email').val(); 
+			let book_isbn = $('.book_isbn').val(); 
+			
+			if(email == "") {
+				alert("로그인 후 이용해주세요");
+				location.href="/member/login";
+			} else {
+				
+				if (confirm("장바구니에 담겠습니까?")) {
+				
+					let data = {
+	           				book_isbn: book_isbn
+	           		};
+					
+					$.ajax({
+	           			type: "post",
+	           			url: "/search/cartChk",
+	           			data: data,
+	           			success: function(result) {
+	           				
+	           				if (result == "success") {
+	           					alert("내 장바구니 등록되었습니다.");
+	           					$("#cart").attr("action", "/search/cart?detail=not");
+	           					$("#cart").attr("onsubmit", "return true;");
+	           					$("#cart").submit();
+	       						
+	           				} else if (result == "alreadyCart"){
+	           					alert("이미 담긴 도서입니다.");
+	           				} 
+	           			}
+	           		});
+				
+				}
+				
+				
+			} 
+				
+		});
+		let quantity = $(".quantity_input").val();
+		$(".plus_btn").on("click", function(){
+			$(".quantity_input").val(++quantity);
+		});
+		$(".minus_btn").on("click", function(){
+			if(quantity > 1){
+				$(".quantity_input").val(--quantity);	
+			}
 		});
 	});
 	</script>	

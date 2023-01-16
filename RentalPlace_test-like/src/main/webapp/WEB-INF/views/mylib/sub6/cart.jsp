@@ -54,7 +54,7 @@
                             <div class="inline">
                                 <form action="">
                                 	
-                                    <span style="margin-right: 10px;"> 찜한 도서 : 총 <b>${total }</b> 건</span>
+                                    <span style="margin-right: 10px;"> 장바구니 : 총 <b>${total }</b> 건</span>
                                     <select name="amount">
                                     	
 	                                    <c:if test="${pageMaker.cri.amount == 10 }">
@@ -94,34 +94,40 @@
 
                             <!-- 테이블 -->
                             <div class="table-wrap">
-                            	<c:if test="${not empty like_history }">
+                            	<c:if test="${not empty cart }">
                                 <table>
                                     <thead>
                                         <tr>
                                         	<th style=""></th>
                                         	<th style="">책이미지</th>
                                             <th style="">도서명</th>
-                                            <th style="">저자</th>
-                                            <th style="width: 90px;">발행일</th>
+                                            <th style="">수량</th>
+                                            <th style="width: 90px;">가격</th>
                                             <th style="width: 90px">출판사</th>
                                             <th style="width: 120px"></th>
 	                                </tr>
                                     </thead>
                                     <tbody>
                                     
-	                                    <c:forEach var="like_history" items="${like_history}">
+	                                    <c:forEach var="cart" items="${cart}">
 										<tr>
 											<td><input type="checkbox" /></td> 
 											<td class="">
                                                 <img src="${like_history.book_cover }" style="width: 200px;">
                                             </td> 
-											<td>${like_history.book_title }</td> 
-											<td>${like_history.book_author}</td>
-											<td>${like_history.book_pubDate }</td>
-											<td>${like_history.book_publisher }</td>
+											<td>${cart.book_title }</td> 
+											<td>${cart.bookCount}
+											<div>
+											<button type="button" id="plus_btn" value="추가">+</button>
+											<button type="button" id="minus_btn" value="감소">-</button>	
+											</div>
+											<a class = modify_btn" data-cartId="${cart.cartId}"> 변경</a>
+											</td>
+											<td>${cart.priceStandard } pattern="#,###원"</td>
+											<td>${cart.book_publisher }</td>
 											<td>
-												<button type="button" id="deleteBtn" value="삭제하기">삭제하기</button>
-												<button type="button" id="addBagBtn" value="장바구니 담기">장바구니</button>
+												<button type="button" id="deleteBtn" value="삭제하기" data-cartid="${cart.cartId }">삭제하기</button>
+												<button type="button" id="addBagBtn" value="구매하기">구매하기</button>
 											</td>
 										</tr>
 										</c:forEach>
@@ -148,16 +154,28 @@
 								</c:if>
 								
                             </div>
-                            
+                            <form action="/cart/update" method="post" class="quantity_update_form">
+							<input type="hidden" name="cartId" class="update_cartId">
+							<input type="hidden" name="bookCount" class="update_bookCount">
+							<input type="hidden" name="memberId" value="${member.userId}">
+							</form>
+							<form action="/cart/delete" method="post" class="quantity_delete_form">
+								<input type="hidden" name="cartId" class="delete_cartId">
+								<input type="hidden" name="memberId" value="${member.memberId}">
+							</form>
                         </div>
 						<br>
-                        <c:if test="${empty like_history }">
+                        <c:if test="${empty cart }">
 							<h2>찜한 도서가 없습니다.</h2>
 						</c:if>
                     </div>
 
                 </div>
-
+				<form action="/cart/update" method="post" class="quantity_update_form">
+				<input type="hidden" name="cartId" class="update_cartId">
+				<input type="hidden" name="bookCount" class="update_bookCount">
+				<input type="hidden" name="memberId" value="${member.userId}">
+			</form>
             </div>
         </div>
     </div>
@@ -186,6 +204,30 @@
 				moveForm.submit();
 			});
 			
+			$(".plus_btn").on("click", function(){
+				let quantity = $(this).parent("div").find("input").val();
+				$(this).parent("div").find("input").val(++quantity);
+			});
+			$(".minus_btn").on("click", function(){
+				let quantity = $(this).parent("div").find("input").val();
+				if(quantity > 1){
+					$(this).parent("div").find("input").val(--quantity);		
+				}
+			});
+			$(".quantity_modify_btn").on("click", function(){
+				let cartId = $(this).data("cartid");
+				let bookCount = $(this).parent("td").find("input").val();
+				$(".update_cartId").val(cartId);
+				$(".update_bookCount").val(bookCount);
+				$(".quantity_update_form").submit();
+				
+			});
+			$(".delete_btn").on("click", function(e){
+				e.preventDefault();
+				const cartId = $(this).data("cartid");
+				$(".delete_cartId").val(cartId);
+				$(".quantity_delete_form").submit();
+			});
 			 
 		});
 		

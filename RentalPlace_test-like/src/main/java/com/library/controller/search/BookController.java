@@ -390,7 +390,7 @@ public class BookController {
 
 				if (cart_check == 1) {
 
-					return "alreadyLike";
+					return "alreadyCart";
 
 				} else {
 
@@ -411,13 +411,14 @@ public class BookController {
 			// id 세팅
 			book.setUser_id(id);
 
-			System.out.println("\n======================== 찜하기 ========================");
+			System.out.println("\n======================== 장바구니 담기 ========================");
 			System.out.println("장바구니번호 : " + book.getCart_id());
 			System.out.println("아이디 : " + book.getUser_id());
-			System.out.println("찜한 책 제목 : " + book.getBook_title());
-			System.out.println("찜한 책 ISBN : " + book.getBook_isbn());
+			System.out.println("책 제목 : " + book.getBook_title());
+			System.out.println("책 ISBN : " + book.getBook_isbn());
 			System.out.println("keyword : " + cri.getKeyword());
 			System.out.println("도서가격 : " + book.getPriceStandard());
+			System.out.println("수량 : " + book.getBookCount());
 			System.out.println("========================================================\n");
 
 			String keyword;
@@ -448,7 +449,7 @@ public class BookController {
 			return "redirect:/mylib/cart" +book.getUser_id();
 
 		}
-		@PostMapping("/cart/update")
+		@PostMapping("/cart/delete")
 		public String deleteCartPOST(BookDTO book) {
 			
 			bookService.deleteCart(book.getCart_id());
